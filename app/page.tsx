@@ -2,8 +2,7 @@
 import { useState } from "react";
 import Chat from "./components/chat";
 import { FaRobot, FaMinus } from "react-icons/fa";
-import { MetricCard } from "./components/MetricCard";
-import { ChevronDown, Package, ShoppingBag } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { DonutChart } from "./components/DonutChart";
@@ -11,7 +10,11 @@ import { LineChartComponent } from "./components/LineChart";
 import { Badge } from "@/components/ui/badge";
 import { RevenueChart } from "./components/Revenue-chart";
 import { Button } from "@/components/ui/button";
-import { CustomerBarChart } from "./components/CustomerBarChart";
+import BookedCard from "./components/BookedCard";
+import GuestCard from "./components/GuestCard";
+import CanceledBookingsCard from "./components/CancelBookingCard";
+import FrequentUnitsCard from "./components/FrequentUnitsCard";
+import { CustomerBarChart } from "./components/charts/CustomerBarChart";
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,43 +23,11 @@ export default function Home() {
     <div>
       <main className="flex-1 bg-muted/20 p-6">
         <div className="space-y-6">
-          {/* <div>
-            <h1 className="text-2xl font-bold tracking-tight">Dashboard</h1>
-            <p className="text-muted-foreground">
-              Hi, Samantha. Welcome back to Sedap Admin!
-            </p>
-          </div> */}
-          {/* <Separator /> */}
-
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            <MetricCard
-              title="Total Orders"
-              value="75"
-              trend="+15 (20%)"
-              icon={<ShoppingBag className="h-5 w-5 text-emerald-500" />}
-              iconBg="bg-emerald-100"
-            />
-            <MetricCard
-              title="Total Delivered"
-              value="357"
-              trend="+20 (5.9%)"
-              icon={<Package className="h-5 w-5 text-emerald-500" />}
-              iconBg="bg-emerald-100"
-            />
-            <MetricCard
-              title="Total Cancelled"
-              value="65"
-              trend="+10 (15.4%)"
-              icon={<Package className="h-5 w-5 text-rose-500" />}
-              iconBg="bg-rose-100"
-            />
-            <MetricCard
-              title="Total Revenue"
-              value="$128"
-              trend="+$15 (13.2%)"
-              icon={<ShoppingBag className="h-5 w-5 text-emerald-500" />}
-              iconBg="bg-emerald-100"
-            />
+          <div className="grid gap-4 md:grid-cols-2   ">
+            <BookedCard />
+            <GuestCard />
+            <CanceledBookingsCard />
+            <FrequentUnitsCard />
           </div>
 
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">

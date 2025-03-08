@@ -35,7 +35,7 @@ export default function AppSidebar() {
             <SidebarMenuButton asChild isActive>
               <a href="#" className="flex items-center gap-3">
                 <Home className="h-4 w-4" />
-                <span>Dashboard</span>
+                <span>Booking Detail</span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
