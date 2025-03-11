@@ -1,6 +1,7 @@
 "use client";
 
 import { Home, List, Package, User } from "lucide-react";
+import Link from "next/link";
 
 const Sidebar = () => {
   return (
@@ -18,17 +19,17 @@ const Sidebar = () => {
         <div className="p-4 overflow-y-auto h-[calc(100%-4rem-4rem)]">
           <ul className="space-y-2">
             <li>
-              <a
-                href="#"
+              <Link
+                href="/"
                 className="flex items-center gap-3 py-2 px-4 hover:bg-gray-700 rounded"
               >
                 <Home className="h-4 w-4" />
                 <span>Booking Detail</span>
-              </a>
+              </Link>
             </li>
             <li>
               <a
-                href="#"
+                href="/birthdays"
                 className="flex items-center gap-3 py-2 px-4 hover:bg-gray-700 rounded"
               >
                 <List className="h-4 w-4" />
@@ -37,7 +38,7 @@ const Sidebar = () => {
             </li>
             <li>
               <a
-                href="#"
+                href="/totalincome"
                 className="flex items-center gap-3 py-2 px-4 hover:bg-gray-700 rounded"
               >
                 <Package className="h-4 w-4" />
@@ -46,11 +47,11 @@ const Sidebar = () => {
             </li>
             <li>
               <a
-                href="#"
+                href="/agegroup"
                 className="flex items-center gap-3 py-2 px-4 hover:bg-gray-700 rounded"
               >
                 <User className="h-4 w-4" />
-                <span>Customer</span>
+                <span>Guest By AgeGroup</span>
               </a>
             </li>
           </ul>
