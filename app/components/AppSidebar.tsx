@@ -1,134 +1,68 @@
 "use client";
 
-import {
-  Calendar,
-  Home,
-  LineChart,
-  List,
-  MessageSquare,
-  Package,
-  ShoppingBag,
-  User,
-  Wallet,
-} from "lucide-react";
+import { Home, List, Package, User } from "lucide-react";
 
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-} from "@/components/ui/sidebar";
-
-export default function AppSidebar() {
+const Sidebar = () => {
   return (
-    <Sidebar className="border-r">
-      <SidebarHeader className="border-b p-4">
-        <div className="flex items-center gap-2">
+    <>
+      {/* Sidebar */}
+      <div
+        className={`sticky top-0 h-screen w-[250px] bg-gray-800 text-white transition-all duration-300`}
+      >
+        {/* Sidebar Header */}
+        <div className="p-4 border-b border-gray-700">
           <h2 className="text-2xl font-bold">MidNight</h2>
         </div>
-      </SidebarHeader>
-      <SidebarContent>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild isActive>
-              <a href="#" className="flex items-center gap-3">
+
+        {/* Sidebar Content */}
+        <div className="p-4 overflow-y-auto h-[calc(100%-4rem-4rem)]">
+          <ul className="space-y-2">
+            <li>
+              <a
+                href="#"
+                className="flex items-center gap-3 py-2 px-4 hover:bg-gray-700 rounded"
+              >
                 <Home className="h-4 w-4" />
                 <span>Booking Detail</span>
               </a>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild>
-              <a href="#" className="flex items-center gap-3">
+            </li>
+            <li>
+              <a
+                href="#"
+                className="flex items-center gap-3 py-2 px-4 hover:bg-gray-700 rounded"
+              >
                 <List className="h-4 w-4" />
-                <span>Order List</span>
+                <span>Guests Birthday</span>
               </a>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild>
-              <a href="#" className="flex items-center gap-3">
+            </li>
+            <li>
+              <a
+                href="#"
+                className="flex items-center gap-3 py-2 px-4 hover:bg-gray-700 rounded"
+              >
                 <Package className="h-4 w-4" />
-                <span>Order Detail</span>
+                <span>Total Income</span>
               </a>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild>
-              <a href="#" className="flex items-center gap-3">
+            </li>
+            <li>
+              <a
+                href="#"
+                className="flex items-center gap-3 py-2 px-4 hover:bg-gray-700 rounded"
+              >
                 <User className="h-4 w-4" />
                 <span>Customer</span>
               </a>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild>
-              <a href="#" className="flex items-center gap-3">
-                <LineChart className="h-4 w-4" />
-                <span>Analytics</span>
-              </a>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild>
-              <a href="#" className="flex items-center gap-3">
-                <MessageSquare className="h-4 w-4" />
-                <span>Reviews</span>
-              </a>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild>
-              <a href="#" className="flex items-center gap-3">
-                <ShoppingBag className="h-4 w-4" />
-                <span>Foods</span>
-              </a>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild>
-              <a href="#" className="flex items-center gap-3">
-                <Package className="h-4 w-4" />
-                <span>Food Detail</span>
-              </a>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild>
-              <a href="#" className="flex items-center gap-3">
-                <User className="h-4 w-4" />
-                <span>Customer Detail</span>
-              </a>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild>
-              <a href="#" className="flex items-center gap-3">
-                <Calendar className="h-4 w-4" />
-                <span>Calendar</span>
-              </a>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild>
-              <a href="#" className="flex items-center gap-3">
-                <MessageSquare className="h-4 w-4" />
-                <span>Chat</span>
-              </a>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild>
-              <a href="#" className="flex items-center gap-3">
-                <Wallet className="h-4 w-4" />
-                <span>Wallet</span>
-              </a>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarContent>
-    </Sidebar>
+            </li>
+          </ul>
+        </div>
+
+        {/* Sidebar Footer */}
+        <div className="p-4 border-t border-gray-700">
+          <p className="text-sm">© 2025 MidNight</p>
+        </div>
+      </div>
+    </>
   );
-}
+};
+
+export default Sidebar;
