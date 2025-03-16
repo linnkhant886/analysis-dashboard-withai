@@ -1,6 +1,6 @@
 "use client";
 
-import { Home, List, Package, User } from "lucide-react";
+import { ChartLine, Home, List, LogOut, Package, User } from "lucide-react";
 import Link from "next/link";
 
 const Sidebar = () => {
@@ -20,7 +20,7 @@ const Sidebar = () => {
           <ul className="space-y-2">
             <li>
               <Link
-                href="/"
+                href="/dashboard/"
                 className="flex items-center gap-3 py-2 px-4 hover:bg-gray-700 rounded"
               >
                 <Home className="h-4 w-4" />
@@ -28,38 +28,53 @@ const Sidebar = () => {
               </Link>
             </li>
             <li>
-              <a
-                href="/birthdays"
+              <Link
+                href="/dashboard/birthdays"
                 className="flex items-center gap-3 py-2 px-4 hover:bg-gray-700 rounded"
               >
                 <List className="h-4 w-4" />
                 <span>Guests Birthday</span>
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/totalincome"
+              <Link
+                href="/dashboard/totalincome"
                 className="flex items-center gap-3 py-2 px-4 hover:bg-gray-700 rounded"
               >
                 <Package className="h-4 w-4" />
                 <span>Total Income</span>
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/agegroup"
+              <Link
+                href="/dashboard/agegroup"
                 className="flex items-center gap-3 py-2 px-4 hover:bg-gray-700 rounded"
               >
                 <User className="h-4 w-4" />
                 <span>Guest By AgeGroup</span>
-              </a>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/dashboard/analytics"
+                className="flex items-center gap-3 py-2 px-4 hover:bg-gray-700 rounded"
+              >
+                <ChartLine className="h-4 w-4" />
+                <span>Booking-Analytics</span>
+              </Link>
             </li>
           </ul>
         </div>
 
         {/* Sidebar Footer */}
         <div className="p-4 border-t border-gray-700">
-          <p className="text-sm">© 2025 MidNight</p>
+          <Link
+            href="/"
+            className="flex  items-center w-[150px] gap-5 text-sm bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded"
+          >
+            <LogOut className="h-6 w-6" />
+            Logout
+          </Link>
         </div>
       </div>
     </>

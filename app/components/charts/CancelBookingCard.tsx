@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { CustomerBarChart } from "./charts/CustomerBarChart";
+import { CustomerBarChart } from "./CustomerBarChart";
 
 const CanceledBookingsCard = () => {
   // Placeholder data for March 2025
