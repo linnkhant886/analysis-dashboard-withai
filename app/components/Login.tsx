@@ -29,20 +29,20 @@ export default function LoginPage() {
     };
 
     try {
-        const result = await authenticateUser(email, password);
-        console.log(result);
-        // Store authentication token in localStorage
-        localStorage.setItem("authToken", "your-auth-token");
-        // Redirect to the dashboard
-        router.push("/dashboard");
-      } catch (error) {
-        console.error(error);
-        alert("Authentication failed. Please check your credentials.");
-      }
+      const result = await authenticateUser(email, password);
+      console.log(result);
+      // Store authentication token in localStorage
+      localStorage.setItem("authToken", "your-auth-token");
+      // Redirect to the dashboard
+      router.push("/dashboard");
+    } catch (error) {
+      console.error(error);
+      alert("Authentication failed. Please check your credentials.");
+    }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white">
+    <div className="min-h-screen   flex items-center justify-center bg-white">
       {/* Main Container */}
       {/* Left Side - Login Form */}
       <div className="w-1/2 p-20 flex flex-col items-center justify-center bg-white">
@@ -109,12 +109,12 @@ export default function LoginPage() {
       {/* Right Side - Image/Background */}
       <div className="w-1/2 bg-cover bg-center">
         <Image
-          src="/login-photo.png"
+          src="/booking.jpg"
           alt="Login"
           width={500}
           height={800}
           objectFit="cover"
-          className="w-screen h-screen p-3"
+          className="w-screen h-screen p-1 "
         />
       </div>
     </div>
