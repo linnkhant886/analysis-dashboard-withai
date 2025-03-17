@@ -2,8 +2,18 @@
 
 import { ChartLine, Home, List, LogOut, Package, User } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Sidebar = () => {
+  const router = useRouter();
+
+  const handleLogout = () => {
+    // Clear authentication token from localStorages
+    document.cookie = "authToken=; Max-Age=0; path=/";
+    // Redirect to the login page
+    router.push("/");
+  };
+
   return (
     <>
       {/* Sidebar */}
@@ -68,13 +78,13 @@ const Sidebar = () => {
 
         {/* Sidebar Footer */}
         <div className="p-4 border-t border-gray-700">
-          <Link
-            href="/"
+          <button
+            onClick={handleLogout}
             className="flex  items-center w-[150px] gap-5 text-sm bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded"
           >
             <LogOut className="h-6 w-6" />
             Logout
-          </Link>
+          </button>
         </div>
       </div>
     </>

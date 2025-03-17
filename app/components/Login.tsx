@@ -32,7 +32,7 @@ export default function LoginPage() {
       const result = await authenticateUser(email, password);
       console.log(result);
       // Store authentication token in localStorage
-      localStorage.setItem("authToken", "your-auth-token");
+      document.cookie = "authToken=your-auth-token; path=/; max-age=3600";
       // Redirect to the dashboard
       router.push("/dashboard");
     } catch (error) {
