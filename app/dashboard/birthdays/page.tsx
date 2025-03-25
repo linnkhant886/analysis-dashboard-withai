@@ -1,6 +1,6 @@
 "use client";
 
-import React, {  useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   Card,
   CardContent,
@@ -50,6 +50,14 @@ import {
   Check,
   X,
 } from "lucide-react";
+import dynamic from "next/dynamic";
+
+const ExportPDFButton = dynamic(
+  () => import("../../components/ExportPDFButton"),
+  {
+    ssr: false,
+  }
+);
 
 interface Guest {
   id: number;
@@ -60,7 +68,6 @@ interface Guest {
   vip: boolean;
   paymentMethod: string;
 }
-
 
 // Mock data - replace with actual data from your API
 const allGuestBirthdays = [
@@ -256,7 +263,7 @@ export default function GuestBirthdayDashboard() {
     "monthly"
   );
   const [searchQuery, setSearchQuery] = useState<string>("");
- 
+
   const [selectedGuest, setSelectedGuest] = useState<Guest | null>(null);
   const [selectedGiftPackage, setSelectedGiftPackage] = useState<number | null>(
     null
@@ -266,7 +273,7 @@ export default function GuestBirthdayDashboard() {
   const [showPaymentForm, setShowPaymentForm] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<string>("upcoming");
   const [selectedGuestId, setSelectedGuestId] = useState<number | null>(null);
-
+  const dashboardRef = useRef<HTMLDivElement | null>(null);
   // Filter birthdays based on selected date and view mode
   const filterBirthdays = (
     guests: Guest[],
@@ -310,15 +317,6 @@ export default function GuestBirthdayDashboard() {
     filterBirthdays(allGuestBirthdays, selectedDate, viewMode)
   );
 
-  // Group birthd
-
-
-  // Group birthdays by payment method for the pie chart
- 
-  
-  // Colors for the pie chart
- 
-
   // Handle month navigation
   const navigateMonth = (direction: "prev" | "next") => {
     if (direction === "prev") {
@@ -346,11 +344,17 @@ export default function GuestBirthdayDashboard() {
     setSelectedGuest(null);
   };
 
-
   return (
-    <div className="p-6 bg-background min-h-screen">
-      <h1 className="text-3xl font-bold mb-6">Guest Birthday Dashboard</h1>
-
+    <div ref={dashboardRef} className="p-6 bg-background min-h-screen">
+      <div className="flex justify-between ">
+        <h1 className="text-3xl font-bold mb-6">Guest Birthday Dashboard</h1>
+        <ExportPDFButton
+          contentRef={dashboardRef}
+          fileName="birthday_report"
+          buttonText="Export File"
+          className="mt-4"
+        />
+      </div>
       <Tabs defaultValue={activeTab} onValueChange={setActiveTab}>
         <TabsList className="mb-4">
           <TabsTrigger value="upcoming">Upcoming Birthdays</TabsTrigger>
@@ -425,8 +429,6 @@ export default function GuestBirthdayDashboard() {
                       onChange={(e) => setSearchQuery(e.target.value)}
                     />
                   </div>
-
-                  
                 </CardContent>
               </Card>
             </motion.div>
@@ -532,7 +534,11 @@ export default function GuestBirthdayDashboard() {
                                   <Button
                                     variant="outline"
                                     size="sm"
-                                    className={isSelected ? "bg-primary hover:bg-primary/80 hover:text-white text-white" : ""}
+                                    className={
+                                      isSelected
+                                        ? "bg-primary hover:bg-primary/80 hover:text-white text-white"
+                                        : ""
+                                    }
                                     onClick={() => {
                                       setActiveTab("gifts");
                                       setSelectedGuestId(guest.id);
@@ -568,7 +574,6 @@ export default function GuestBirthdayDashboard() {
           </div>
         </TabsContent>
 
-        
         {/* Birthday Gifts Tab */}
         <TabsContent value="gifts" className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -730,7 +735,8 @@ export default function GuestBirthdayDashboard() {
                 <div className="p-6">
                   <h2 className="text-xl font-bold mb-4">Payment Details</h2>
                   <p className="text-sm text-muted-foreground mb-6">
-                    Complete payment for {selectedGuest.name}&apos;s birthday gift
+                    Complete payment for {selectedGuest.name}&apos;s birthday
+                    gift
                   </p>
 
                   <form onSubmit={handlePaymentSubmit} className="space-y-4">

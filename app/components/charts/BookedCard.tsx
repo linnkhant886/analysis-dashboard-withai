@@ -1,7 +1,8 @@
+"use client";
 import React from "react";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"; 
-import { ArrowUpIcon } from "lucide-react"; 
-import { Separator } from "@/components/ui/separator"
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { ArrowUpIcon } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
 const BookedCard = () => {
   // Placeholder data for March 08, 2025
   const currentMonthArrivals = 178; // Arrivals in March 2025
@@ -10,8 +11,14 @@ const BookedCard = () => {
   const totalYearBookings = 1000; // Total bookings for 2025
 
   // Calculate percentages
-  const monthPercentage = ((currentMonthArrivals / totalMonthBookings) * 100).toFixed(1);
-  const yearPercentage = ((currentYearArrivals / totalYearBookings) * 100).toFixed(1);
+  const monthPercentage = (
+    (currentMonthArrivals / totalMonthBookings) *
+    100
+  ).toFixed(1);
+  const yearPercentage = (
+    (currentYearArrivals / totalYearBookings) *
+    100
+  ).toFixed(1);
 
   return (
     <Card className="w-full max-w-2xl">
@@ -24,7 +31,9 @@ const BookedCard = () => {
           <div className="flex-1 space-y-2">
             <div className="flex items-center justify-between">
               <div className="space-y-2">
-                <p className="text-sm text-muted-foreground">This Month (March)</p>
+                <p className="text-sm text-muted-foreground">
+                  This Month (March)
+                </p>
                 <h3 className="text-2xl font-bold">{currentMonthArrivals}</h3>
                 <p className="text-xs text-emerald-600">
                   {monthPercentage}% of {totalMonthBookings} bookings
@@ -36,12 +45,14 @@ const BookedCard = () => {
             </div>
           </div>
           {/* Divider */}
-         <Separator  orientation="vertical" className="h-34" />
+          <Separator orientation="vertical" className="h-34" />
           {/* Current Year Section */}
           <div className="flex-1 space-y-2">
             <div className="flex items-center justify-between">
-              <div  className="space-y-2">
-                <p className="text-sm text-muted-foreground">This Year (2025)</p>
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">
+                  This Year (2025)
+                </p>
                 <h3 className="text-2xl font-bold">{currentYearArrivals}</h3>
                 <p className="text-xs text-emerald-600">
                   {yearPercentage}% of {totalYearBookings} bookings

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useRef } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import {
   ChartContainer,
@@ -7,6 +7,14 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { PieChart, Pie, Cell } from "recharts";
+import dynamic from "next/dynamic";
+
+const ExportPDFButton = dynamic(
+  () => import("../../components/ExportPDFButton"),
+  {
+    ssr: false,
+  }
+);
 
 interface DonutChartProps {
   data: { label: string; value: number; color: string }[];
@@ -34,6 +42,7 @@ const DonutChart: React.FC<DonutChartProps> = ({
     { label: data[0].label, value: data[0].value, color: data[0].color },
     { label: "Remaining", value: remainingValue, color: "#E5E7EB" }, // Gray for unfilled portion
   ];
+
   return (
     <ChartContainer
       config={{
@@ -68,17 +77,27 @@ const DonutChart: React.FC<DonutChartProps> = ({
 };
 
 const Dashboard = () => {
+  const ageGroupRef = useRef<HTMLDivElement | null>(null);
+
   return (
-    <div className=" w-full p-2">
+    <div ref={ageGroupRef} className=" w-full p-2">
       {/* Age Group Segmentation Card */}
       <Card className="col-span-3">
         <CardHeader>
           <CardTitle className="text-base font-medium">
             Age Group Segmentation (March 2025)
           </CardTitle>
-          <p className="text-xs text-muted-foreground">
-            Bookings by age group: Child, Adult, Middle Age, Elder
-          </p>
+          <div className="flex justify-between">
+            <p className="text-xs text-muted-foreground">
+              Bookings by age group: Child, Adult, Middle Age, Elder
+            </p>
+
+            <ExportPDFButton
+              contentRef={ageGroupRef}
+              fileName="age_group_report"
+              buttonText="Export File"
+            />
+          </div>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 gap-4">

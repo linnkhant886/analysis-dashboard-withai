@@ -1,11 +1,39 @@
-'use client';
+"use client";
 
-import React from 'react';
+import React, { useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import {
+  BarChart,
+  Bar,
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 import { motion } from "framer-motion";
-import { ArrowUpRight, ArrowDownRight, DollarSign, TrendingUp } from 'lucide-react';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  ArrowUpRight,
+  ArrowDownRight,
+  DollarSign,
+  TrendingUp,
+} from "lucide-react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import dynamic from "next/dynamic";
+
+const ExportPDFButton = dynamic(() => import("../../components/ExportPDFButton"), {
+  ssr: false,
+});
+
 
 // Mock data - replace with actual data from your API
 const currentMonthIncome = 15750;
@@ -14,35 +42,47 @@ const currentYearIncome = 178500;
 const lastYearIncome = 165000;
 
 const monthlyData = [
-  { name: 'Jan', income: 12000 },
-  { name: 'Feb', income: 13500 },
-  { name: 'Mar', income: 14200 },
-  { name: 'Apr', income: 15000 },
-  { name: 'May', income: 14800 },
-  { name: 'Jun', income: 16000 },
-  { name: 'Jul', income: 15500 },
-  { name: 'Aug', income: 16200 },
-  { name: 'Sep', income: 15800 },
-  { name: 'Oct', income: 16500 },
-  { name: 'Nov', income: 15750 },
-  { name: 'Dec', income: 0 },
+  { name: "Jan", income: 12000 },
+  { name: "Feb", income: 13500 },
+  { name: "Mar", income: 14200 },
+  { name: "Apr", income: 15000 },
+  { name: "May", income: 14800 },
+  { name: "Jun", income: 16000 },
+  { name: "Jul", income: 15500 },
+  { name: "Aug", income: 16200 },
+  { name: "Sep", income: 15800 },
+  { name: "Oct", income: 16500 },
+  { name: "Nov", income: 15750 },
+  { name: "Dec", income: 0 },
 ];
 
 const yearlyData = [
-  { year: '2019', income: 145000 },
-  { year: '2020', income: 155000 },
-  { year: '2021', income: 165000 },
-  { year: '2022', income: 172000 },
-  { year: '2023', income: 178500 },
+  { year: "2019", income: 145000 },
+  { year: "2020", income: 155000 },
+  { year: "2021", income: 165000 },
+  { year: "2022", income: 172000 },
+  { year: "2023", income: 178500 },
 ];
 
 export default function IncomeDashboard() {
-  const monthlyChange = ((currentMonthIncome - lastMonthIncome) / lastMonthIncome) * 100;
-  const yearlyChange = ((currentYearIncome - lastYearIncome) / lastYearIncome) * 100;
+  const monthlyChange =
+    ((currentMonthIncome - lastMonthIncome) / lastMonthIncome) * 100;
+  const yearlyChange =
+    ((currentYearIncome - lastYearIncome) / lastYearIncome) * 100;
+
+  const incomeRef = useRef<HTMLDivElement | null>(null);
 
   return (
-    <div className="p-8 bg-background min-h-screen">
-      <h1 className="text-3xl font-bold mb-6">Total Income</h1>
+    <div ref={incomeRef} className="p-8 bg-background min-h-screen">
+      <div className="flex justify-between mb-4">
+        <h1 className="text-3xl font-bold ">Total Income</h1>
+        <ExportPDFButton
+          contentRef={incomeRef}
+          fileName="income_report"
+          buttonText="Export File"
+        />
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Monthly Income Card */}
         <motion.div
@@ -58,7 +98,9 @@ export default function IncomeDashboard() {
               <DollarSign className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">${currentMonthIncome.toLocaleString()}</div>
+              <div className="text-2xl font-bold">
+                ${currentMonthIncome.toLocaleString()}
+              </div>
               <p className="text-xs text-muted-foreground">
                 {monthlyChange > 0 ? (
                   <span className="text-green-600 flex items-center">
@@ -90,7 +132,9 @@ export default function IncomeDashboard() {
               <TrendingUp className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">${currentYearIncome.toLocaleString()}</div>
+              <div className="text-2xl font-bold">
+                ${currentYearIncome.toLocaleString()}
+              </div>
               <p className="text-xs text-muted-foreground">
                 {yearlyChange > 0 ? (
                   <span className="text-green-600 flex items-center">
@@ -181,10 +225,17 @@ export default function IncomeDashboard() {
                 <TableBody>
                   <TableRow>
                     <TableCell>Current Month</TableCell>
-                    <TableCell>${currentMonthIncome.toLocaleString()}</TableCell>
                     <TableCell>
-                      <span className={monthlyChange > 0 ? "text-green-600" : "text-red-600"}>
-                        {monthlyChange > 0 ? "+" : "-"}{Math.abs(monthlyChange).toFixed(2)}%
+                      ${currentMonthIncome.toLocaleString()}
+                    </TableCell>
+                    <TableCell>
+                      <span
+                        className={
+                          monthlyChange > 0 ? "text-green-600" : "text-red-600"
+                        }
+                      >
+                        {monthlyChange > 0 ? "+" : "-"}
+                        {Math.abs(monthlyChange).toFixed(2)}%
                       </span>
                     </TableCell>
                   </TableRow>
@@ -192,8 +243,13 @@ export default function IncomeDashboard() {
                     <TableCell>Current Year</TableCell>
                     <TableCell>${currentYearIncome.toLocaleString()}</TableCell>
                     <TableCell>
-                      <span className={yearlyChange > 0 ? "text-green-600" : "text-red-600"}>
-                        {yearlyChange > 0 ? "+" : "-"}{Math.abs(yearlyChange).toFixed(2)}%
+                      <span
+                        className={
+                          yearlyChange > 0 ? "text-green-600" : "text-red-600"
+                        }
+                      >
+                        {yearlyChange > 0 ? "+" : "-"}
+                        {Math.abs(yearlyChange).toFixed(2)}%
                       </span>
                     </TableCell>
                   </TableRow>

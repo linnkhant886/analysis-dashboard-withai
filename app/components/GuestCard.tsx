@@ -1,3 +1,5 @@
+'use client';
+
 import React from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"; // Adjust path based on your setup
 import { ArrowUpIcon, ArrowDownIcon } from "lucide-react"; // Lucide icons for arrivals/departures
