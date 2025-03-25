@@ -38,7 +38,7 @@ const FrequentUnitsCard = () => {
               /* your chart config here */
             }
           }
-          className="h-[200px]  "
+          className="h-[215px]  "
         >
           <PieChart width={400} height={400}>
             <Pie
@@ -48,7 +48,7 @@ const FrequentUnitsCard = () => {
               cx="70%"
               cy="50%"
               innerRadius={40}
-              outerRadius={90} // Increased size for better visibility
+              outerRadius={80} // Increased size for better visibility
               fill="#4F46E5"
               paddingAngle={3}
               label={({ name, percent }) =>

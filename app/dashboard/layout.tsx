@@ -9,13 +9,13 @@ interface Props {
 export default function Layout({ children }: Props) {
   return (
     <div>
-      <div className="flex  min-h-screen">
-        <AppSidebar />
-        <div className="flex flex-1 flex-col">
-          <TopBar />
-          {children}
+        <div className="flex  min-h-screen">
+          <AppSidebar />
+          <div className="flex flex-1 flex-col">
+            <TopBar />
+            {children}
+          </div>
         </div>
-      </div>
     </div>
   );
 }

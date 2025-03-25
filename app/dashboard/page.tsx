@@ -48,7 +48,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="flex gap-2">
+          <div className="">
           <Button onClick={exportToPDF}>Export as PDF</Button>
           </div>
         </div>

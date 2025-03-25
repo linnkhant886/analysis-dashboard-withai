@@ -26,23 +26,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import {
-  PieChart,
-  Pie,
-  Cell,
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
+
 import { motion } from "framer-motion";
 import {
   format,
@@ -323,42 +310,14 @@ export default function GuestBirthdayDashboard() {
     filterBirthdays(allGuestBirthdays, selectedDate, viewMode)
   );
 
-  // Group birthdays by month for the chart
-  const birthdaysByMonth = allGuestBirthdays.reduce((acc, guest) => {
-    const month = format(guest.birthday, "MMM");
-    acc[month] = (acc[month] || 0) + 1;
-    return acc;
-  }, {} as Record<string, number>);
+  // Group birthd
 
-  const monthlyChartData = Object.entries(birthdaysByMonth).map(
-    ([month, count]) => ({
-      month,
-      count,
-    })
-  );
 
   // Group birthdays by payment method for the pie chart
-  const birthdaysByPaymentMethod = allGuestBirthdays.reduce((acc, guest) => {
-    acc[guest.paymentMethod] = (acc[guest.paymentMethod] || 0) + 1;
-    return acc;
-  }, {} as Record<string, number>);
-
-  const paymentChartData = Object.entries(birthdaysByPaymentMethod).map(
-    ([method, count]) => ({
-      name: method,
-      value: count,
-    })
-  );
-
+ 
+  
   // Colors for the pie chart
-  const COLORS = [
-    "#8884d8",
-    "#82ca9d",
-    "#ffc658",
-    "#ff8042",
-    "#0088FE",
-    "#00C49F",
-  ];
+ 
 
   // Handle month navigation
   const navigateMonth = (direction: "prev" | "next") => {
@@ -395,7 +354,6 @@ export default function GuestBirthdayDashboard() {
       <Tabs defaultValue={activeTab} onValueChange={setActiveTab}>
         <TabsList className="mb-4">
           <TabsTrigger value="upcoming">Upcoming Birthdays</TabsTrigger>
-          <TabsTrigger value="analytics">Birthday Analytics</TabsTrigger>
           <TabsTrigger value="gifts">Birthday Gifts</TabsTrigger>
         </TabsList>
 
@@ -468,12 +426,7 @@ export default function GuestBirthdayDashboard() {
                     />
                   </div>
 
-                  <Calendar
-                    mode="single"
-                    selected={selectedDate}
-                    onSelect={(date) => date && setSelectedDate(date)}
-                    className="rounded-md border"
-                  />
+                  
                 </CardContent>
               </Card>
             </motion.div>
@@ -615,151 +568,7 @@ export default function GuestBirthdayDashboard() {
           </div>
         </TabsContent>
 
-        {/* Birthday Analytics Tab */}
-        <TabsContent value="analytics" className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <Card>
-                <CardHeader>
-                  <CardTitle>Birthdays by Month</CardTitle>
-                  <CardDescription>
-                    Distribution of guest birthdays throughout the year
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ResponsiveContainer width="100%" height={300}>
-                    <BarChart data={monthlyChartData}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="month" />
-                      <YAxis />
-                      <Tooltip />
-                      <Legend />
-                      <Bar
-                        dataKey="count"
-                        name="Number of Birthdays"
-                        fill="#8884d8"
-                      />
-                    </BarChart>
-                  </ResponsiveContainer>
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              <Card>
-                <CardHeader>
-                  <CardTitle>Payment Methods</CardTitle>
-                  <CardDescription>
-                    Distribution of guest payment preferences
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="h-[300px] flex items-center justify-center">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <PieChart>
-                        <Pie
-                          data={paymentChartData}
-                          cx="50%"
-                          cy="50%"
-                          labelLine={false}
-                          outerRadius={80}
-                          fill="#8884d8"
-                          dataKey="value"
-                          label={({ name, percent }) =>
-                            `${name}: ${(percent * 100).toFixed(0)}%`
-                          }
-                        >
-                          {paymentChartData.map((entry, index) => (
-                            <Cell
-                              key={`cell-${index}`}
-                              fill={COLORS[index % COLORS.length]}
-                            />
-                          ))}
-                        </Pie>
-                        <Tooltip />
-                      </PieChart>
-                    </ResponsiveContainer>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <Card>
-              <CardHeader>
-                <CardTitle>Birthday Statistics</CardTitle>
-                <CardDescription>
-                  Key metrics about guest birthdays
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-                  <div className="bg-primary/10 p-4 rounded-lg">
-                    <div className="text-sm font-medium text-muted-foreground">
-                      Total Birthdays
-                    </div>
-                    <div className="text-2xl font-bold">
-                      {allGuestBirthdays.length}
-                    </div>
-                  </div>
-                  <div className="bg-primary/10 p-4 rounded-lg">
-                    <div className="text-sm font-medium text-muted-foreground">
-                      VIP Guests
-                    </div>
-                    <div className="text-2xl font-bold">
-                      {allGuestBirthdays.filter((g) => g.vip).length}
-                    </div>
-                  </div>
-                  <div className="bg-primary/10 p-4 rounded-lg">
-                    <div className="text-sm font-medium text-muted-foreground">
-                      This Month
-                    </div>
-                    <div className="text-2xl font-bold">
-                      {
-                        allGuestBirthdays.filter((g) => {
-                          const thisYearBirthday = new Date(
-                            new Date().getFullYear(),
-                            g.birthday.getMonth(),
-                            g.birthday.getDate()
-                          );
-                          return isSameMonth(thisYearBirthday, new Date());
-                        }).length
-                      }
-                    </div>
-                  </div>
-                  <div className="bg-primary/10 p-4 rounded-lg">
-                    <div className="text-sm font-medium text-muted-foreground">
-                      Average Age
-                    </div>
-                    <div className="text-2xl font-bold">
-                      {Math.round(
-                        allGuestBirthdays.reduce(
-                          (sum, guest) =>
-                            sum + differenceInYears(new Date(), guest.birthday),
-                          0
-                        ) / allGuestBirthdays.length
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-        </TabsContent>
-
+        
         {/* Birthday Gifts Tab */}
         <TabsContent value="gifts" className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

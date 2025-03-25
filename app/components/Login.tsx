@@ -46,7 +46,7 @@ export default function LoginPage() {
       {/* Main Container */}
       {/* Left Side - Login Form */}
       <div className="w-1/2 p-20 flex flex-col items-center justify-center bg-white">
-        <h1 className="text-4xl font-bold mb-4">WELCOME BACK</h1>
+        <h1 className="text-4xl font-bold mb-4">MidNight</h1>
         <p className="text-gray-600 mb-8">
           Welcome back! Please enter your details.
         </p>

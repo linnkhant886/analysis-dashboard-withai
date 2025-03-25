@@ -66,7 +66,7 @@ export default function BookingAnalytics() {
 
   return (
     <div className="p-6 bg-background">
-      <h1 className="text-3xl font-bold mb-6">Booking Analytics - {format(currentMonth, 'MMMM yyyy')}</h1>
+      <h1 className="text-3xl font-bold mb-6">Booking Analysis - {format(currentMonth, 'MMMM yyyy')}</h1>
       
       <Tabs defaultValue="overview" onValueChange={setActiveTab}>
         <TabsList className="mb-4">
