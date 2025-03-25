@@ -70,7 +70,7 @@ const Sidebar = () => {
                 className="flex items-center gap-3 py-2 px-4 hover:bg-gray-700 rounded"
               >
                 <ChartLine className="h-4 w-4" />
-                <span>Booking-Analytics</span>
+                <span>Booking-Analysis</span>
               </Link>
             </li>
           </ul>

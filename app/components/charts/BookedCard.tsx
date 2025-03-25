@@ -4,7 +4,7 @@ import { ArrowUpIcon } from "lucide-react";
 import { Separator } from "@/components/ui/separator"
 const BookedCard = () => {
   // Placeholder data for March 08, 2025
-  const currentMonthArrivals = 50; // Arrivals in March 2025
+  const currentMonthArrivals = 178; // Arrivals in March 2025
   const totalMonthBookings = 200; // Total bookings for March 2025
   const currentYearArrivals = 300; // Arrivals in 2025
   const totalYearBookings = 1000; // Total bookings for 2025
