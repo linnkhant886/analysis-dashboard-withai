@@ -92,7 +92,7 @@ const allGuestBirthdays = [
   {
     id: 3,
     name: "Charlie Brown",
-    birthday: new Date(1992, 2, 5),
+    birthday: new Date(1992, 2, 27),
     email: "charlie@gmail.com",
     phone: "+1 (555) 345-6789",
     vip: false,
@@ -100,30 +100,30 @@ const allGuestBirthdays = [
   },
   {
     id: 4,
-    name: "Diana Prince",
+    name: "Mr Boonyarit",
     birthday: new Date(1988, 3, 18),
-    email: "diana@gmail.com",
+    email: "Boonyarit@gmail.com",
     phone: "+1 (555) 456-7890",
     vip: true,
-    paymentMethod: "Apple Pay",
+    paymentMethod: "Credit Card",
   },
   {
     id: 5,
-    name: "Edward Cullen",
+    name: "Sarah Azhari",
     birthday: new Date(1995, 4, 30),
-    email: "edward@gmail.com",
+    email: "Sarah@gmail.com",
     phone: "+1 (555) 567-8901",
     vip: false,
     paymentMethod: "Credit Card",
   },
   {
     id: 6,
-    name: "Fiona Gallagher",
+    name: "Monica Bellucci",
     birthday: new Date(1991, 5, 2),
-    email: "fiona@gmail.com",
+    email: "Monica@gmail.com",
     phone: "+1 (555) 678-9012",
     vip: false,
-    paymentMethod: "Google Pay",
+    paymentMethod: "Bank Transfer",
   },
   {
     id: 7,
@@ -136,9 +136,9 @@ const allGuestBirthdays = [
   },
   {
     id: 8,
-    name: "Hannah Baker",
+    name: "Elena Anaya",
     birthday: new Date(1993, 7, 22),
-    email: "hannah@gmail.com",
+    email: "Elena@gmail.com",
     phone: "+1 (555) 890-1234",
     vip: false,
     paymentMethod: "PayPal",
@@ -159,7 +159,7 @@ const allGuestBirthdays = [
     email: "julia@gmail.com",
     phone: "+1 (555) 012-3456",
     vip: true,
-    paymentMethod: "Apple Pay",
+    paymentMethod: "Bank Transfer",
   },
   {
     id: 11,
@@ -177,7 +177,7 @@ const allGuestBirthdays = [
     email: "laura@gmail.com",
     phone: "+1 (555) 234-5678",
     vip: false,
-    paymentMethod: "Google Pay",
+    paymentMethod: "Bank Transfer",
   },
   // Current month birthdays (for testing)
   {
@@ -191,16 +191,16 @@ const allGuestBirthdays = [
   },
   {
     id: 14,
-    name: "Nancy Wheeler",
+    name: "Mr Krit Pong",
     birthday: new Date(1992, new Date().getMonth(), 12),
     email: "nancy@gmail.com",
     phone: "+1 (555) 456-7890",
     vip: false,
-    paymentMethod: "PayPal",
+    paymentMethod: "Bank Transfer",
   },
   {
     id: 15,
-    name: "Oscar Martinez",
+    name: "Nyan Lin Aung",
     birthday: new Date(1985, new Date().getMonth(), 18),
     email: "oscar@gmail.com",
     phone: "+1 (555) 567-8901",
@@ -209,12 +209,12 @@ const allGuestBirthdays = [
   },
   {
     id: 16,
-    name: "Pam Beesly",
+    name: "Naw Th Aung",
     birthday: new Date(1990, new Date().getMonth(), 25),
     email: "pam@gmail.com",
     phone: "+1 (555) 678-9012",
     vip: true,
-    paymentMethod: "Apple Pay",
+    paymentMethod: "Bank Transfer",
   },
 ];
 
@@ -399,17 +399,18 @@ export default function GuestBirthdayDashboard() {
                     </Button>
                   </div>
 
-                  <div className="flex space-x-2">
+                  <div className="flex space-x-2  ">
                     <Select
                       value={viewMode}
                       onValueChange={(value: "weekly" | "monthly" | "yearly") =>
                         setViewMode(value)
                       }
+                      
                     >
-                      <SelectTrigger>
+                      <SelectTrigger className="flex justify-center items-center text-center">
                         <SelectValue placeholder="Select view mode" />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent >
                         <SelectItem value="weekly">Weekly</SelectItem>
                         <SelectItem value="monthly">Monthly</SelectItem>
                         <SelectItem value="yearly">All Birthdays</SelectItem>

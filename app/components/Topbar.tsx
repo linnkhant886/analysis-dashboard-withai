@@ -3,8 +3,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ModeToggle } from "./ModeToggle";
 
-
-
 export default function TopBar() {
   return (
     <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background px-6">
@@ -21,7 +19,18 @@ export default function TopBar() {
               <AvatarFallback>R</AvatarFallback>
             </Avatar>
             <div className="hidden md:block">
-              <p className="text-sm font-medium">Hello, Richard</p>
+              <p
+                className="text-sm font-medium"
+                style={{
+                  background: "linear-gradient(to right, #1E3A8A, #A78BFA)",
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                  color: "transparent",
+                  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
+                }}
+              >
+                Hello, Richard
+              </p>
             </div>
           </div>
         </div>

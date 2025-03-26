@@ -1,6 +1,6 @@
 "use client";
 
-import { ChartLine, Home, List, LogOut, Package, User } from "lucide-react";
+import { ChartLine,  CircleDollarSign , LogOut, FileChartPie , User,Cake  } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -33,7 +33,7 @@ const Sidebar = () => {
                 href="/dashboard/"
                 className="flex items-center gap-3 py-2 px-4 hover:bg-gray-700 rounded"
               >
-                <Home className="h-4 w-4" />
+                <FileChartPie className="h-4 w-4" />
                 <span>Booking Detail</span>
               </Link>
             </li>
@@ -42,7 +42,7 @@ const Sidebar = () => {
                 href="/dashboard/birthdays"
                 className="flex items-center gap-3 py-2 px-4 hover:bg-gray-700 rounded"
               >
-                <List className="h-4 w-4" />
+                <Cake className="h-4 w-4" />
                 <span>Guests Birthday</span>
               </Link>
             </li>
@@ -51,7 +51,7 @@ const Sidebar = () => {
                 href="/dashboard/totalincome"
                 className="flex items-center gap-3 py-2 px-4 hover:bg-gray-700 rounded"
               >
-                <Package className="h-4 w-4" />
+                <CircleDollarSign className="h-4 w-4" />
                 <span>Total Income</span>
               </Link>
             </li>

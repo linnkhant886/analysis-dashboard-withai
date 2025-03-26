@@ -32,7 +32,7 @@ export default function LoginPage() {
       const result = await authenticateUser(email, password);
       console.log(result);
       // Store authentication token in localStorage
-      document.cookie = "authToken=your-auth-token; path=/; max-age=3600";
+      document.cookie = "authToken=your-auth-token; path=/; max-age=7200";
       // Redirect to the dashboard
       router.push("/dashboard");
     } catch (error) {
@@ -46,7 +46,18 @@ export default function LoginPage() {
       {/* Main Container */}
       {/* Left Side - Login Form */}
       <div className="w-1/2 p-20 flex flex-col items-center justify-center bg-white">
-        <h1 className="text-4xl font-bold mb-4">MidNight</h1>
+        <h1
+          className="text-4xl font-bold mb-4"
+          style={{
+            background: "linear-gradient(to right, #1E3A8A, #A78BFA)",
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            color: "transparent",
+            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
+          }}
+        >
+          MidNight
+        </h1>
         <p className="text-gray-600 mb-8">
           Welcome back! Please enter your details.
         </p>
