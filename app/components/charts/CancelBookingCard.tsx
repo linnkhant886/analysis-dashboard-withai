@@ -6,7 +6,7 @@ import { CustomerBarChart } from "./CustomerBarChart";
 
 const CanceledBookingsCard = () => {
   // Placeholder data for March 2025
-  const totalBookings = 200; // Total bookings in March
+  const totalBookings = 1079; // Total bookings in March
   const canceledBookings = 30; // Canceled bookings in March
   const canceledPercentage = ((canceledBookings / totalBookings) * 100).toFixed(
     1

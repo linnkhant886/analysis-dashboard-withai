@@ -107,29 +107,29 @@ const paymentMethodData = [
     trend: "+5.2%",
     status: "up",
   },
-  { name: "PayPal", value: 25, color: "#82ca9d", trend: "+2.8%", status: "up" },
+  { name: "Bank Transfer", value: 25, color: "#82ca9d", trend: "+2.8%", status: "up" },
   {
-    name: "Bank Transfer",
+    name: "Debit Card",
     value: 15,
     color: "#ffc658",
     trend: "-1.5%",
     status: "down",
   },
   {
-    name: "Apple Pay",
+    name: "Cash ",
     value: 8,
     color: "#ff8042",
     trend: "+12.3%",
     status: "up",
   },
   {
-    name: "Google Pay",
+    name: "Cheque",
     value: 5,
     color: "#0088FE",
     trend: "+8.7%",
     status: "up",
   },
-  { name: "Cash", value: 2, color: "#00C49F", trend: "-3.2%", status: "down" },
+  { name: "Internet Transfer", value: 2, color: "#00C49F", trend: "-3.2%", status: "down" },
 ];
 
 
@@ -283,7 +283,7 @@ export default function Payment() {
                     <DollarSign className="h-6 w-6 text-[#ff8042]" />
                   </div>
                   <div>
-                    <div className="text-xl font-bold">Apple Pay</div>
+                    <div className="text-xl font-bold">Bank Transfer</div>
                     <div className="text-sm text-muted-foreground">
                       +12.3% month over month
                     </div>

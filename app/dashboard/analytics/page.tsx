@@ -43,7 +43,7 @@ const ExportPDFButton = dynamic(
 const FIXED_TOTAL_BOOKINGS = 1079;
 
 // Fixed averages for the month
-const FIXED_AVG_OCCUPANCY_RATE = 75; // 75% average occupancy rate
+const FIXED_AVG_OCCUPANCY_RATE = 90; // 75% average occupancy rate
 const FIXED_AVG_ADR = 200; // $200 average daily rate
 const TOTAL_ROOMS = 100; // Total rooms in the hotel
 
@@ -116,7 +116,7 @@ const generateMockData = () => {
     // Occupancy rate: Vary slightly around the fixed average (75%)
     const occupancyVariation = (Math.random() * 10 - 5); // Vary by ±5%
     const occupancyRate = Math.min(100, Math.max(0, FIXED_AVG_OCCUPANCY_RATE + occupancyVariation));
-    const occupiedRooms = Math.round((occupancyRate / 100) * TOTAL_ROOMS);
+    const occupiedRooms = Math.round((occupancyRate / 100) * TOTAL_ROOMS)
 
     // ADR: Vary slightly around the fixed average ($200)
     const adrVariation = (Math.random() * 20 - 10); // Vary by ±$10

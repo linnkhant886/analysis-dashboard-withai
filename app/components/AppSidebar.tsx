@@ -18,7 +18,7 @@ const Sidebar = () => {
     <>
       {/* Sidebar */}
       <div
-        className={`sticky top-0 h-screen w-[250px] bg-gray-800 text-white transition-all duration-300`}
+        className={`sticky top-0 hidden md:block h-screen w-[250px] bg-gray-800 text-white transition-all duration-300`}
       >
         {/* Sidebar Header */}
         <div className="p-4 border-b border-gray-700">

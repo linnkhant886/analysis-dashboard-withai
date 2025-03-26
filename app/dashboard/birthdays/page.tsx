@@ -415,9 +415,7 @@ export default function GuestBirthdayDashboard() {
                         <SelectItem value="yearly">All Birthdays</SelectItem>
                       </SelectContent>
                     </Select>
-                    <Button onClick={() => setSelectedDate(new Date())}>
-                      Today
-                    </Button>
+                    
                   </div>
 
                   <div className="relative">
