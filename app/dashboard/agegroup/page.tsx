@@ -23,13 +23,19 @@ interface DonutChartProps {
 }
 
 // Sample data for age group segmentation (March 2025)
-// Values represent percentages of a total (e.g., 100 bookings)
-const ageGroupData = [
+const rawAgeGroupData = [
   { label: "Child (0-12)", value: 40, color: "#FF6B6B" },
   { label: "Adult (13-30)", value: 78, color: "#2ECC71" },
   { label: "Middle Age (31-60)", value: 80, color: "#3498DB" },
   { label: "Elder (61+)", value: 30, color: "#9B59B6" },
 ];
+
+// Normalize the data to sum to 100%
+const totalRawValue = rawAgeGroupData.reduce((sum, item) => sum + item.value, 0);
+const ageGroupData = rawAgeGroupData.map((item) => ({
+  ...item,
+  value: Number(((item.value / totalRawValue) * 100).toFixed(2)), // Normalize and round to 2 decimal places
+}));
 
 const DonutChart: React.FC<DonutChartProps> = ({
   data,
@@ -63,8 +69,8 @@ const DonutChart: React.FC<DonutChartProps> = ({
           dataKey="value"
           labelLine={true}
           label={({ value, index }) =>
-            index === 0 ? `${value}%  ${data[0].label}` : ""
-          } // Show label only for the filled segment
+            index === 0 ? `${value}% ${data[0].label}` : ""
+          }
         >
           {chartData.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={entry.color} />
@@ -80,7 +86,7 @@ const Dashboard = () => {
   const ageGroupRef = useRef<HTMLDivElement | null>(null);
 
   return (
-    <div ref={ageGroupRef} className=" w-full p-2">
+    <div ref={ageGroupRef} className="w-full p-2">
       {/* Age Group Segmentation Card */}
       <Card className="col-span-3">
         <CardHeader>
@@ -102,7 +108,7 @@ const Dashboard = () => {
         <CardContent>
           <div className="grid grid-cols-2 gap-4">
             {ageGroupData.map((item) => (
-              <div key={item.label} className="w-full ">
+              <div key={item.label} className="w-full">
                 <DonutChart
                   data={[
                     { label: item.label, value: item.value, color: item.color },

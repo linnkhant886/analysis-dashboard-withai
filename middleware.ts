@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function middleware(request: NextRequest) {
   const token = request.cookies.get("authToken");
-  console.log("Token in middleware:", token);
 
   // Check if the user is authenticated
   if (!token || token.value !== "your-auth-token") {

@@ -5,10 +5,10 @@ import { ArrowUpIcon } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 const BookedCard = () => {
   // Placeholder data for March 08, 2025
-  const currentMonthArrivals = 178; // Arrivals in March 2025
-  const totalMonthBookings = 200; // Total bookings for March 2025
-  const currentYearArrivals = 300; // Arrivals in 2025
-  const totalYearBookings = 1000; // Total bookings for 2025
+  const currentMonthArrivals = 1049; // Arrivals in March 2025
+  const totalMonthBookings = 1079; // Total bookings for March 2025
+  const currentYearArrivals = 3000; // Arrivals in 2025
+  const totalYearBookings = 3050; // Total bookings for 2025
 
   // Calculate percentages
   const monthPercentage = (
@@ -23,7 +23,7 @@ const BookedCard = () => {
   return (
     <Card className="w-full max-w-2xl">
       <CardHeader>
-        <CardTitle>Booking Arrivals (March 08, 2025)</CardTitle>
+        <CardTitle>Booking Arrivals </CardTitle>
       </CardHeader>
       <CardContent>
         <div className="flex justify-between gap-6">

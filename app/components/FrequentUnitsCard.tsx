@@ -1,4 +1,4 @@
-"use client"; 
+"use client";
 import React from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import {
@@ -10,9 +10,9 @@ import { PieChart, Pie, Cell } from "recharts";
 
 // Placeholder data for March 2025
 const topUnits = [
-  { name: "Unit A", bookings: 25, color: "#4F46E5" }, // Indigo shade
-  { name: "Unit B", bookings: 18, color: "#8B5CF6" }, // Purple shade
-  { name: "Unit C", bookings: 15, color: "#A855F7" }, // Deeper purple shade
+  { name: "Unit A", bookings: 400, color: "#4F46E5" }, // Indigo shade
+  { name: "Unit B", bookings: 360, color: "#8B5CF6" }, // Purple shade
+  { name: "Unit C", bookings: 319, color: "#A855F7" }, // Deeper purple shade
 ];
 
 const FrequentUnitsCard = () => {
@@ -24,7 +24,7 @@ const FrequentUnitsCard = () => {
       <CardHeader>
         <CardTitle>Most Booked Units (March 2025)</CardTitle>
       </CardHeader>
-      <CardContent >
+      <CardContent>
         {/* Summary */}
         <div>
           <p className="text-sm text-muted-foreground">Total Bookings</p>

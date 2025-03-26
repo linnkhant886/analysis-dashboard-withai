@@ -9,13 +9,13 @@ import {
 
 const canceledData = [
   { day: "Mar 1", cancellations: 5, color: "#E52020" }, // Red shade
-  { day: "Mar 2", cancellations: 1, color: "#E52020" },
-  { day: "Mar 3", cancellations: 4, color: "#E52020" },
-  { day: "Mar 4", cancellations: 6, color: "#E52020" },
-  { day: "Mar 5", cancellations: 2, color: "#E52020" },
-  { day: "Mar 6", cancellations: 15, color: "#E52020" },
-  { day: "Mar 7", cancellations: 8, color: "#E52020" },
-  { day: "Mar 8", cancellations: 3, color: "#E52020" },
+  { day: "Mar 8", cancellations: 1, color: "#E52020" },
+  { day: "Mar 13", cancellations: 4, color: "#E52020" },
+  { day: "Mar 18", cancellations: 6, color: "#E52020" },
+  { day: "Mar 22", cancellations: 2, color: "#E52020" },
+  { day: "Mar 25", cancellations: 15, color: "#E52020" },
+  { day: "Mar 28", cancellations: 8, color: "#E52020" },
+  { day: "Mar 31", cancellations: 3, color: "#E52020" },
 ];
 
 export function CustomerBarChart() {

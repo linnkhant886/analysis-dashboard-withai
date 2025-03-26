@@ -7,13 +7,13 @@ import { Separator } from "@/components/ui/separator";
 
 const GuestCard = () => {
   // Placeholder data for March 08, 2025
-  const arrivals = 15; // Replace with your actual data
+  const arrivals = 20; // Replace with your actual data
   const departures = 8; // Replace with your actual data
 
   return (
     <Card className="w-full max-w-2xl">
       <CardHeader>
-        <CardTitle>Today’s Bookings (March 08, 2025)</CardTitle>
+        <CardTitle>Today’s Bookings </CardTitle>
       </CardHeader>
       <CardContent>
         <div className="flex justify-between gap-6">

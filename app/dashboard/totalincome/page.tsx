@@ -20,14 +20,7 @@ import {
   DollarSign,
   TrendingUp,
 } from "lucide-react";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+
 import dynamic from "next/dynamic";
 
 const ExportPDFButton = dynamic(() => import("../../components/ExportPDFButton"), {
@@ -37,31 +30,31 @@ const ExportPDFButton = dynamic(() => import("../../components/ExportPDFButton")
 
 // Mock data - replace with actual data from your API
 const currentMonthIncome = 15750;
-const lastMonthIncome = 14200;
-const currentYearIncome = 178500;
+const lastMonthIncome = 24250;
+const currentYearIncome = 70000;
 const lastYearIncome = 165000;
 
 const monthlyData = [
-  { name: "Jan", income: 12000 },
-  { name: "Feb", income: 13500 },
-  { name: "Mar", income: 14200 },
-  { name: "Apr", income: 15000 },
-  { name: "May", income: 14800 },
-  { name: "Jun", income: 16000 },
-  { name: "Jul", income: 15500 },
-  { name: "Aug", income: 16200 },
-  { name: "Sep", income: 15800 },
-  { name: "Oct", income: 16500 },
-  { name: "Nov", income: 15750 },
+  { name: "Jan", income: 30000 },
+  { name: "Feb", income: 24250 },
+  { name: "Mar", income: 15750 },
+  { name: "Apr", income: 0 },
+  { name: "May", income: 0 },
+  { name: "Jun", income: 0 },
+  { name: "Jul", income: 0 },
+  { name: "Aug", income: 0 },
+  { name: "Sep", income: 0 },
+  { name: "Oct", income: 0 },
+  { name: "Nov", income: 0 },
   { name: "Dec", income: 0 },
 ];
 
 const yearlyData = [
-  { year: "2019", income: 145000 },
-  { year: "2020", income: 155000 },
-  { year: "2021", income: 165000 },
-  { year: "2022", income: 172000 },
-  { year: "2023", income: 178500 },
+  { year: "2020", income: 145000 },
+  { year: "2021", income: 155000 },
+  { year: "2022", income: 165000 },
+  { year: "2023", income: 172000 },
+  { year: "2024", income: 178500 },
 ];
 
 export default function IncomeDashboard() {
@@ -202,62 +195,6 @@ export default function IncomeDashboard() {
           </Card>
         </motion.div>
 
-        {/* Income Breakdown Table */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="col-span-1 md:col-span-2"
-        >
-          <Card>
-            <CardHeader>
-              <CardTitle>Income Breakdown</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Period</TableHead>
-                    <TableHead>Income</TableHead>
-                    <TableHead>Change</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  <TableRow>
-                    <TableCell>Current Month</TableCell>
-                    <TableCell>
-                      ${currentMonthIncome.toLocaleString()}
-                    </TableCell>
-                    <TableCell>
-                      <span
-                        className={
-                          monthlyChange > 0 ? "text-green-600" : "text-red-600"
-                        }
-                      >
-                        {monthlyChange > 0 ? "+" : "-"}
-                        {Math.abs(monthlyChange).toFixed(2)}%
-                      </span>
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>Current Year</TableCell>
-                    <TableCell>${currentYearIncome.toLocaleString()}</TableCell>
-                    <TableCell>
-                      <span
-                        className={
-                          yearlyChange > 0 ? "text-green-600" : "text-red-600"
-                        }
-                      >
-                        {yearlyChange > 0 ? "+" : "-"}
-                        {Math.abs(yearlyChange).toFixed(2)}%
-                      </span>
-                    </TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>
-            </CardContent>
-          </Card>
-        </motion.div>
       </div>
     </div>
   );

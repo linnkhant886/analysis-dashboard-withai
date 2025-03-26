@@ -8,7 +8,7 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import {
   BarChart,
   Bar,
@@ -30,6 +30,7 @@ import {
 import { motion } from "framer-motion";
 import { format, startOfMonth, endOfMonth, eachDayOfInterval } from "date-fns";
 import dynamic from "next/dynamic";
+import Payment from "./payment";
 
 const ExportPDFButton = dynamic(
   () => import("../../components/ExportPDFButton"),
@@ -38,29 +39,99 @@ const ExportPDFButton = dynamic(
   }
 );
 
-// Mock data - replace with actual data from your API
+// Fixed total bookings for the month
+const FIXED_TOTAL_BOOKINGS = 1079;
+
+// Fixed averages for the month
+const FIXED_AVG_OCCUPANCY_RATE = 75; // 75% average occupancy rate
+const FIXED_AVG_ADR = 200; // $200 average daily rate
+const TOTAL_ROOMS = 100; // Total rooms in the hotel
+
+// Current month and days
 const currentMonth = new Date();
 const daysInMonth = eachDayOfInterval({
   start: startOfMonth(currentMonth),
   end: endOfMonth(currentMonth),
 }).map((date) => format(date, "MMM dd"));
+const numDays = daysInMonth.length;
 
-// Generate mock data for the current month
+// Generate fixed data for the current month
 const generateMockData = () => {
-  return daysInMonth.map((day) => {
+  // Step 1: Calculate the original percentage split for member vs. general bookings
+  const originalData = daysInMonth.map(() => {
     const memberBookings = Math.floor(Math.random() * 15) + 5;
     const generalBookings = Math.floor(Math.random() * 20) + 10;
-    const totalRooms = 100;
-    const occupiedRooms = Math.floor(Math.random() * 80) + 20;
-    const revenue = occupiedRooms * (Math.floor(Math.random() * 100) + 150);
+    return { memberBookings, generalBookings };
+  });
+
+  const totalMemberBookingsOriginal = originalData.reduce(
+    (sum, day) => sum + day.memberBookings,
+    0
+  );
+  const totalGeneralBookingsOriginal = originalData.reduce(
+    (sum, day) => sum + day.generalBookings,
+    0
+  );
+  const totalBookingsOriginal =
+    totalMemberBookingsOriginal + totalGeneralBookingsOriginal;
+
+  const memberPercentage =
+    (totalMemberBookingsOriginal / totalBookingsOriginal) * 100;
+  
+
+  // Step 2: Scale member and general bookings to fit the fixed total of 1079
+  const totalMemberBookings = Math.round(
+    (memberPercentage / 100) * FIXED_TOTAL_BOOKINGS
+  );
+  const totalGeneralBookings = FIXED_TOTAL_BOOKINGS - totalMemberBookings;
+
+  // Step 3: Distribute bookings across days, with a slight variation (e.g., higher on weekends)
+  const dailyBookings = daysInMonth.map((_, index) => {
+    const date = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), index + 1);
+    const isWeekend = date.getDay() === 0 || date.getDay() === 6; // Saturday or Sunday
+    const weight = isWeekend ? 1.2 : 0.8; // 20% more bookings on weekends, 20% less on weekdays
+    return weight;
+  });
+
+  const totalWeight = dailyBookings.reduce((sum, weight) => sum + weight, 0);
+  const memberBookingsPerDay = dailyBookings.map((weight) =>
+    Math.round((weight / totalWeight) * totalMemberBookings)
+  );
+  const generalBookingsPerDay = dailyBookings.map((weight) =>
+    Math.round((weight / totalWeight) * totalGeneralBookings)
+  );
+
+  // Adjust the last day to ensure the total matches exactly 1079
+  const currentMemberTotal = memberBookingsPerDay.reduce((sum, val) => sum + val, 0);
+  const currentGeneralTotal = generalBookingsPerDay.reduce((sum, val) => sum + val, 0);
+  memberBookingsPerDay[numDays - 1] += totalMemberBookings - currentMemberTotal;
+  generalBookingsPerDay[numDays - 1] += totalGeneralBookings - currentGeneralTotal;
+
+  // Step 4: Generate daily data with fixed averages for occupancy rate and ADR
+  return daysInMonth.map((day, index) => {
+    const memberBookings = memberBookingsPerDay[index];
+    const generalBookings = generalBookingsPerDay[index];
+    const totalBookings = memberBookings + generalBookings;
+
+    // Occupancy rate: Vary slightly around the fixed average (75%)
+    const occupancyVariation = (Math.random() * 10 - 5); // Vary by ±5%
+    const occupancyRate = Math.min(100, Math.max(0, FIXED_AVG_OCCUPANCY_RATE + occupancyVariation));
+    const occupiedRooms = Math.round((occupancyRate / 100) * TOTAL_ROOMS);
+
+    // ADR: Vary slightly around the fixed average ($200)
+    const adrVariation = (Math.random() * 20 - 10); // Vary by ±$10
+    const adr = Math.max(50, FIXED_AVG_ADR + adrVariation); // Ensure ADR is reasonable
+
+    // Revenue: Calculate based on occupied rooms and ADR
+    const revenue = occupiedRooms * adr;
 
     return {
       date: day,
       memberBookings,
       generalBookings,
-      totalBookings: memberBookings + generalBookings,
-      occupancyRate: (occupiedRooms / totalRooms) * 100,
-      adr: revenue / occupiedRooms,
+      totalBookings,
+      occupancyRate,
+      adr,
       revenue,
     };
   });
@@ -113,7 +184,7 @@ export default function BookingAnalytics() {
         </h1>
         <ExportPDFButton
           contentRef={analysisRef}
-          fileName="birthday_report"
+          fileName="booking_analysis_report"
           buttonText="Export File"
           className="mt-4"
         />
@@ -123,6 +194,7 @@ export default function BookingAnalytics() {
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="bookings">Bookings Comparison</TabsTrigger>
           <TabsTrigger value="occupancy">Occupancy & ADR</TabsTrigger>
+          <TabsTrigger value="payment">Payment</TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview" className="space-y-6">
@@ -492,6 +564,11 @@ export default function BookingAnalytics() {
               </CardContent>
             </Card>
           </motion.div>
+        </TabsContent>
+
+        <TabsContent value="payment" className="space-y-6"> 
+
+         <Payment />
         </TabsContent>
       </Tabs>
     </div>
